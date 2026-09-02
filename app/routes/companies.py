@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
-from app.schemas import CompanyCreate
+
+from app.schemas import CompanyCreate, CompanyResponse
 
 router = APIRouter(prefix="/companies", tags=["companies"])
 
@@ -10,6 +11,10 @@ def get_company(company_id: int):
     return {"company_id": company_id}
 
 
-@router.post("")
+@router.post("", response_model=CompanyResponse)
 def create_company(company: CompanyCreate):
-    return company
+    return {
+        "id":1,
+        "name": company.name,
+        "industry": company.industry,
+    }
