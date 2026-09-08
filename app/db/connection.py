@@ -1,10 +1,10 @@
+import os
+
 import psycopg
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def get_connection():
-    return psycopg.connect(
-        host="localhost",
-        port=5432,
-        dbname="enterprise_data",
-        user="appuser",
-        password="apppassword"
-    )
+    return psycopg.connect(os.environ["DATABASE_URL"])
