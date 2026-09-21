@@ -7,16 +7,16 @@ name = "enterprise-data-api"
 version = "0.1.0"
 requires-python = ">=3.13"
 
-[project.optional-dependencies]
-dev = [
-  "pytest"
-]
-
 dependencies = [
   "FastAPI[standard]",
   "psycopg[binary]",
   "alembic",
   "python-dotenv"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest"
 ]
 
 [tool.setuptools.packages.find]
