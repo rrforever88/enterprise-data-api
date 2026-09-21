@@ -11,15 +11,19 @@ os.environ["DATABASE_URL"] = (
 def reset_database():
     with get_connection() as connection:
         with connection.cursor() as cursor:
-            cursor.execute("DELETE FROM contacts")
-            cursor.execute("DELETE FROM companies")
+            cursor.execute(
+                """
+                TRUNCATE TABLE contacts, companies
+                RESTART IDENTITY CASCADE
+                """
+            )
 
             cursor.execute(
                 """
-                INSERT INTO companies (id, name, industry)
-                VALUES (%s, %s, %s)
+                INSERT INTO companies (name, industry)
+                VALUES (%s, %s)
                 """,
-                (1, "Acme", "Manufacturing"),
+                ("Acme", "Manufacturing"),
             )
 
     yield
